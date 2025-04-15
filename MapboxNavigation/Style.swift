@@ -1,4 +1,4 @@
-import MapLibre
+import BeMap
 import UIKit
 
 /**
@@ -192,7 +192,7 @@ public class ReportButton: Button {
 
 /**
  :nodoc:
- `HighlightedButton` sets the button’s titleColor for normal control state according to the style in addition to the styling behavior inherited from
+ `HighlightedButton` sets the button's titleColor for normal control state according to the style in addition to the styling behavior inherited from
  `Button`.
  */
 @objc(MBHighlightedButton)
@@ -570,7 +570,7 @@ public class SeparatorView: UIView {}
 /// :nodoc:
 @objc(MBStylableButton)
 open class StylableButton: UIButton {
-    // Sets the font on the button’s titleLabel
+    // Sets the font on the button's titleLabel
     @objc open dynamic var textFont: UIFont = .systemFont(ofSize: 20, weight: .medium) {
         didSet {
             titleLabel?.font = self.textFont

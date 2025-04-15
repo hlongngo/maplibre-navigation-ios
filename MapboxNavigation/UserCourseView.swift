@@ -1,4 +1,4 @@
-import MapLibre
+import BeMap
 import Turf
 import UIKit
 
@@ -6,7 +6,7 @@ let PuckSize: CGFloat = 45
 let ArrowSize = PuckSize * 0.6
 
 /**
- A view that represents the user’s location and course on a `NavigationMapView`.
+ A view that represents the user's location and course on a `NavigationMapView`.
  */
 @objc(MBUserCourseView)
 public protocol UserCourseView where Self: UIView {
@@ -35,7 +35,7 @@ extension UIView {
 }
 
 /**
- A view representing the user’s location on screen.
+ A view representing the user's location on screen.
  */
 @objc(MBUserPuckCourseView)
 public class UserPuckCourseView: UIView, UserCourseView {

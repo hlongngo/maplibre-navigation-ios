@@ -1,5 +1,5 @@
 import Foundation
-import MapLibre
+import BeMap
 #if canImport(CarPlay)
 import CarPlay
 

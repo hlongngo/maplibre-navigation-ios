@@ -1,5 +1,4 @@
-import Foundation
-import MapLibre
+import BeMap
 
 extension UIColor {
     class var defaultRouteLine: UIColor { ConfigManager.shared.config.routeLineColor }

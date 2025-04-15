@@ -10,15 +10,6 @@
       }
     },
     {
-      "identity" : "maplibre-gl-native-distribution",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/maplibre/maplibre-gl-native-distribution.git",
-      "state" : {
-        "revision" : "6579f48fe126ce2916f7b5d0c84c1869d790c4e4",
-        "version" : "6.4.1"
-      }
-    },
-    {
       "identity" : "polyline",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/raphaelmor/Polyline",

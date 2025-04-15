@@ -8,7 +8,7 @@
 import MapboxCoreNavigation
 import MapboxDirections
 import MapboxNavigation
-import MapLibre
+import BeMap
 import UIKit
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
@@ -18,9 +18,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     
     let startButton = UIButton()
     let waypoints = [
-        CLLocation(latitude: 52.032407, longitude: 5.580310),
-        CLLocation(latitude: 52.04, longitude: 5.580310),
-        CLLocation(latitude: 51.768686, longitude: 4.6827956)
+        CLLocation(latitude: 10.774363, longitude: 106.688320),
+        CLLocation(latitude: 10.765873, longitude: 106.667630) // Nearby location
     ].map { Waypoint(location: $0) }
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
@@ -28,19 +27,18 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 		
         self.window = UIWindow(windowScene: windowScene)
         
-        // NOTE: You will need your own tile server, MapLibre doesn't provide the server infrastructure
-        // so this uses a demo style that only shows country borders
-        // this is not useful to evaluate the navigation, please change accordingly
-        self.viewController = NavigationViewController(dayStyle: DayStyle(demoStyle: ()), nightStyle: NightStyle(demoStyle: ()))
+        // Initialize NavigationViewController with custom style URL
+        let customStyleURL = URL(string: "https://bemap-maptiles-qa.veep.me/styles/basemap/style.json")!
+        self.viewController = NavigationViewController(dayStyle: DayStyle(mapStyleURL: customStyleURL), nightStyle: NightStyle(mapStyleURL: customStyleURL))
         self.viewController.mapView.tracksUserCourse = false
         self.viewController.mapView.showsUserLocation = true
-        self.viewController.mapView.centerCoordinate = self.waypoints[0].coordinate
+        self.viewController.mapView.centerCoordinate = CLLocationCoordinate2D(latitude: 10.8231, longitude: 106.6297) // HCMC coordinates
         self.viewController.delegate = self
         
         self.window?.rootViewController = self.viewController
         self.window?.makeKeyAndVisible()
         
-        self.viewController.mapView.zoomLevel = 5
+        self.viewController.mapView.zoomLevel = 13 // Increase zoom level for better city view
 
         let positionCameraRandomlyButton = UIButton()
         positionCameraRandomlyButton.translatesAutoresizingMaskIntoConstraints = false
@@ -86,7 +84,8 @@ private extension SceneDelegate {
         options.distanceMeasurementSystem = .metric
         options.attributeOptions = []
         
-        Directions.shared.calculate(options) { _, routes, _ in
+        Directions.shared.calculate(options) { _, routes, error in
+            print("Error Directions: \(String(describing: error))")
             guard let route = routes?.first else { return }
             
             self.route = route

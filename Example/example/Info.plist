@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>MGLMapboxAccessToken</key>
-	<string>${MAPBOX_TOKEN}</string>
+	<string>pk.eyJ1IjoiaGxvbmduZ28iLCJhIjoiY2p3a2lkYjVxMHR1MjQ4cDlxdGJqcmV5eCJ9.9rZbOehSKV8DxS59cn6kkQ</string>
 	<key>UIApplicationSceneManifest</key>
 	<dict>
 		<key>UIApplicationSupportsMultipleScenes</key>

@@ -1,7 +1,7 @@
 import MapboxCoreNavigation
 import MapboxDirections
 @testable import MapboxNavigation
-import MapLibre
+import BeMap
 import Turf
 import XCTest
 

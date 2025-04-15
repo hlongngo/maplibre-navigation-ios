@@ -1,0 +1,4 @@
+module BeMap {
+    header "/Users/ngo.huynh/Documents/ForkLib/maplibre-native/output/BeMap.xcframework/ios-arm64/BeMap.framework/Headers/Mapbox.h"
+    export *
+} 

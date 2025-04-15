@@ -1,0 +1,5 @@
+framework module BeMap {
+  umbrella header "BeMap.h"
+  export *
+  module * { export * }
+}

@@ -1,6 +1,6 @@
 import MapboxCoreNavigation
 import MapboxDirections
-import MapLibre
+import BeMap
 import UIKit
 #if canImport(CarPlay)
 import CarPlay
@@ -45,7 +45,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
       If implemented, this method is called as soon as the navigation view controller detects that the user is off the predetermined route. Implement this method to conditionally prevent rerouting. If this method returns `true`, `navigationViewController(_:willRerouteFrom:)` will be called immediately afterwards.
      
       - parameter navigationViewController: The navigation view controller that has detected the need to calculate a new route.
-      - parameter location: The user’s current location.
+      - parameter location: The user's current location.
       - returns: True to allow the navigation view controller to calculate a new route; false to keep tracking the current route.
      */
     @objc(navigationViewController:shouldRerouteFromLocation:)
@@ -57,7 +57,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
      This method is called after `navigationViewController(_:shouldRerouteFrom:)` is called, simultaneously with the `RouteControllerWillReroute` notification being posted, and before `navigationViewController(_:didRerouteAlong:)` is called.
      
      - parameter navigationViewController: The navigation view controller that will calculate a new route.
-     - parameter location: The user’s current location.
+     - parameter location: The user's current location.
      */
     @objc(navigationViewController:willRerouteFromLocation:)
     optional func navigationViewController(_ navigationViewController: NavigationViewController, willRerouteFrom location: CLLocation)
@@ -87,29 +87,29 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
     /**
      Returns an `MLNStyleLayer` that determines the appearance of the route line.
      
-     If this method is unimplemented, the navigation view controller’s map view draws the route line using an `MLNLineStyleLayer`.
+     If this method is unimplemented, the navigation view controller's map view draws the route line using an `MLNLineStyleLayer`.
      */
     @objc optional func navigationViewController(_ navigationViewController: NavigationViewController, routeStyleLayerWithIdentifier identifier: String, source: MLNSource) -> MLNStyleLayer?
     
     /**
-     Returns an `MLNStyleLayer` that determines the appearance of the route line’s casing.
+     Returns an `MLNStyleLayer` that determines the appearance of the route line's casing.
      
-     If this method is unimplemented, the navigation view controller’s map view draws the route line’s casing using an `MLNLineStyleLayer` whose width is greater than that of the style layer returned by `navigationViewController(_:routeStyleLayerWithIdentifier:source:)`.
+     If this method is unimplemented, the navigation view controller's map view draws the route line's casing using an `MLNLineStyleLayer` whose width is greater than that of the style layer returned by `navigationViewController(_:routeStyleLayerWithIdentifier:source:)`.
      */
     @objc optional func navigationViewController(_ navigationViewController: NavigationViewController, routeCasingStyleLayerWithIdentifier identifier: String, source: MLNSource) -> MLNStyleLayer?
     
     /**
      Returns an `MLNShape` that represents the path of the route line.
      
-     If this method is unimplemented, the navigation view controller’s map view represents the route line using an `MLNPolylineFeature` based on `route`’s `coordinates` property.
+     If this method is unimplemented, the navigation view controller's map view represents the route line using an `MLNPolylineFeature` based on `route`'s `coordinates` property.
      */
     @objc(navigationViewController:shapeForRoutes:)
     optional func navigationViewController(_ navigationViewController: NavigationViewController, shapeFor routes: [Route]) -> MLNShape?
     
     /**
-     Returns an `MLNShape` that represents the path of the route line’s casing.
+     Returns an `MLNShape` that represents the path of the route line's casing.
      
-     If this method is unimplemented, the navigation view controller’s map view represents the route line’s casing using an `MLNPolylineFeature` identical to the one returned by `navigationViewController(_:shapeFor:)`.
+     If this method is unimplemented, the navigation view controller's map view represents the route line's casing using an `MLNPolylineFeature` identical to the one returned by `navigationViewController(_:shapeFor:)`.
      */
     @objc(navigationViewController:simplifiedShapeForRoute:)
     optional func navigationViewController(_ navigationViewController: NavigationViewController, simplifiedShapeFor route: Route) -> MLNShape?
@@ -117,14 +117,14 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
     /*
      Returns an `MLNStyleLayer` that marks the location of each destination along the route when there are multiple destinations. The returned layer is added to the map below the layer returned by `navigationViewController(_:waypointSymbolStyleLayerWithIdentifier:source:)`.
      
-     If this method is unimplemented, the navigation view controller’s map view marks each destination waypoint with a circle.
+     If this method is unimplemented, the navigation view controller's map view marks each destination waypoint with a circle.
      */
     @objc optional func navigationViewController(_ navigationViewController: NavigationViewController, waypointStyleLayerWithIdentifier identifier: String, source: MLNSource) -> MLNStyleLayer?
     
     /*
      Returns an `MLNStyleLayer` that places an identifying symbol on each destination along the route when there are multiple destinations. The returned layer is added to the map above the layer returned by `navigationViewController(_:waypointStyleLayerWithIdentifier:source:)`.
      
-     If this method is unimplemented, the navigation view controller’s map view labels each destination waypoint with a number, starting with 1 at the first destination, 2 at the second destination, and so on.
+     If this method is unimplemented, the navigation view controller's map view labels each destination waypoint with a number, starting with 1 at the first destination, 2 at the second destination, and so on.
      */
     @objc optional func navigationViewController(_ navigationViewController: NavigationViewController, waypointSymbolStyleLayerWithIdentifier identifier: String, source: MLNSource) -> MLNStyleLayer?
     
@@ -137,7 +137,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
     optional func navigationViewController(_ navigationViewController: NavigationViewController, shapeFor waypoints: [Waypoint], legIndex: Int) -> MLNShape?
     
     /**
-     Called when the user taps to select a route on the navigation view controller’s map view.
+     Called when the user taps to select a route on the navigation view controller's map view.
      - parameter navigationViewController: The navigation view controller presenting the route that the user selected.
      - parameter route: The route on the map that the user selected.
      */
@@ -145,7 +145,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
     optional func navigationViewController(_ navigationViewController: NavigationViewController, didSelect route: Route)
 	
     /**
-     Called when the user taps to select an annotation on the navigation view controller’s map view.
+     Called when the user taps to select an annotation on the navigation view controller's map view.
      - parameter navigationViewController: The navigation view controller presenting the route that the user selected.
      - parameter annotation: The annotation on the map that the user selected.
      */
@@ -154,7 +154,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
     /**
      Return an `MLNAnnotationImage` that represents the destination marker.
      
-     If this method is unimplemented, the navigation view controller’s map view will represent the destination annotation with the default marker.
+     If this method is unimplemented, the navigation view controller's map view will represent the destination annotation with the default marker.
      */
     @objc(navigationViewController:imageForAnnotation:)
     optional func navigationViewController(_ navigationViewController: NavigationViewController, imageFor annotation: MLNAnnotation) -> MLNAnnotationImage?
@@ -162,7 +162,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
     /**
      Returns a view object to mark the given point annotation object on the map.
      
-     The user location annotation view can also be customized via this method. When annotation is an instance of `MLNUserLocation`, return an instance of `MLNUserLocationAnnotationView` (or a subclass thereof). Note that when `NavigationMapView.tracksUserCourse` is set to `true`, the navigation view controller’s map view uses a distinct user course view; to customize it, set the `NavigationMapView.userCourseView` property of the map view stored by the `NavigationViewController.mapView` property.
+     The user location annotation view can also be customized via this method. When annotation is an instance of `MLNUserLocation`, return an instance of `MLNUserLocationAnnotationView` (or a subclass thereof). Note that when `NavigationMapView.tracksUserCourse` is set to `true`, the navigation view controller's map view uses a distinct user course view; to customize it, set the `NavigationMapView.userCourseView` property of the map view stored by the `NavigationViewController.mapView` property.
      */
     @objc(navigationViewController:viewForAnnotation:)
     optional func navigationViewController(_ navigationViewController: NavigationViewController, viewFor annotation: MLNAnnotation) -> MLNAnnotationView?
@@ -190,7 +190,7 @@ public protocol NavigationViewControllerDelegate: VisualInstructionDelegate {
      This method is called on each location update. By default, the label displays the name of the road the user is currently traveling on.
      
      - parameter navigationViewController: The navigation view controller that will display the road name.
-     - parameter location: The user’s current location.
+     - parameter location: The user's current location.
      - returns: The road name to display in the label, or nil to hide the label.
      */
     @objc(navigationViewController:roadNameAtLocation:)
@@ -269,7 +269,7 @@ open class NavigationViewController: UIViewController {
     public var showsEndOfRouteFeedback: Bool = true
 
     /**
-     The receiver’s delegate.
+     The receiver's delegate.
      */
     public weak var delegate: NavigationViewControllerDelegate?
     
@@ -296,7 +296,7 @@ open class NavigationViewController: UIViewController {
     /**
      The main map view displayed inside the view controller.
      
-     - note: Do not change this map view’s delegate.
+     - note: Do not change this map view's delegate.
      */
     public var mapView: NavigationMapView {
         self.mapViewController.mapView

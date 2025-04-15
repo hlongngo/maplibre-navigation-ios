@@ -1,7 +1,7 @@
 import Foundation
 import MapboxCoreNavigation
 import MapboxDirections
-import MapLibre
+import BeMap
 #if canImport(CarPlay)
 import CarPlay
 
@@ -14,7 +14,7 @@ import CarPlay
 @objc(MBCarPlayNavigationViewController)
 public class CarPlayNavigationViewController: UIViewController, MLNMapViewDelegate {
     /**
-     The view controller’s delegate.
+     The view controller's delegate.
      */
     @objc public weak var carPlayNavigationDelegate: CarPlayNavigationDelegate?
     
@@ -154,9 +154,9 @@ public class CarPlayNavigationViewController: UIViewController, MLNMapViewDelega
     }
     
     /**
-     A Boolean value indicating whether the map should follow the user’s location and rotate when the course changes.
+     A Boolean value indicating whether the map should follow the user's location and rotate when the course changes.
      
-     When this property is true, the map follows the user’s location and rotates when their course changes. Otherwise, the map shows an overview of the route.
+     When this property is true, the map follows the user's location and rotates when their course changes. Otherwise, the map shows an overview of the route.
      */
     @objc public var tracksUserCourse: Bool {
         get {

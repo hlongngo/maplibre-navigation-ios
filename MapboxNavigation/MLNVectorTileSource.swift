@@ -1,5 +1,4 @@
-import Foundation
-import MapLibre
+import BeMap
 
 extension MLNVectorTileSource {
     var isMapboxStreets: Bool {

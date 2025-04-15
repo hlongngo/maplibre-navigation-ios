@@ -1,0 +1,3 @@
+[submodule "BENavigationSDK"]
+        path = BENavigationSDK
+        url = https://github.com/hlongngo/maplibre-navigation-ios.git 

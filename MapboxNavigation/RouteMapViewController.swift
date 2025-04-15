@@ -1,7 +1,7 @@
 import AVFoundation
 import MapboxCoreNavigation
 import MapboxDirections
-import MapLibre
+import BeMap
 import Turf
 import UIKit
 
@@ -18,8 +18,8 @@ class ArrowStrokePolyline: ArrowFillPolyline {}
      This method is called on each location update. By default, the label displays the name of the road the user is currently traveling on.
 
      - parameter mapViewController: The route map view controller that will display the road name.
-     - parameter location: The user’s current location.
-     - return: The road name to display in the label, or the empty string to hide the label, or nil to query the map’s vector tiles for the road name.
+     - parameter location: The user's current location.
+     - return: The road name to display in the label, or the empty string to hide the label, or nil to query the map's vector tiles for the road name.
      */
     @objc func mapViewController(_ mapViewController: RouteMapViewController, roadNameAt location: CLLocation) -> String?
 }
@@ -352,7 +352,7 @@ class RouteMapViewController: UIViewController {
     /**
      Updates the current road name label to reflect the road on which the user is currently traveling.
 
-     - parameter location: The user’s current location.
+     - parameter location: The user's current location.
      */
     func labelCurrentRoad(at rawLocation: CLLocation, for snappedLoction: CLLocation? = nil) {
         guard self.navigationView.resumeButton.isHidden else {

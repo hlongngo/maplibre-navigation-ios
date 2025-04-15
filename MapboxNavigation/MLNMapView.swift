@@ -1,7 +1,7 @@
 import Foundation
 import MapboxCoreNavigation
 import MapboxDirections
-import MapLibre
+import BeMap
 
 /**
  An extension on `MLNMapView` that allows for toggling traffic on a map style that contains a [Mapbox Traffic source](https://www.mapbox.com/vector-tiles/mapbox-traffic-v1/).
@@ -22,7 +22,7 @@ extension MLNMapView {
     }
     
     /**
-     Returns a Boolean value indicating whether data from the given tile set layer is currently visible in the map view’s style.
+     Returns a Boolean value indicating whether data from the given tile set layer is currently visible in the map view's style.
      
      - parameter tileSetIdentifier: Identifier of the tile set in the form `user.tileset`.
      - parameter layerIdentifier: Identifier of the layer in the tile set; in other words, a source layer identifier. Not to be confused with a style layer.
@@ -65,7 +65,7 @@ extension MLNMapView {
     }
 
     /**
-     A Boolean value indicating whether traffic congestion lines are visible in the map view’s style.
+     A Boolean value indicating whether traffic congestion lines are visible in the map view's style.
      */
     public var showsTraffic: Bool {
         get {
@@ -77,7 +77,7 @@ extension MLNMapView {
     }
     
     /**
-     A Boolean value indicating whether incidents, such as road closures and detours, are visible in the map view’s style.
+     A Boolean value indicating whether incidents, such as road closures and detours, are visible in the map view's style.
      */
     public var showsIncidents: Bool {
         get {

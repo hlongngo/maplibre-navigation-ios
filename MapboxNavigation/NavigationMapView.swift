@@ -1,7 +1,7 @@
 import Foundation
 import MapboxCoreNavigation
 import MapboxDirections
-import MapLibre
+import BeMap
 import Turf
 
 /**
@@ -169,9 +169,9 @@ open class NavigationMapView: MLNMapView, UIGestureRecognizerDelegate {
     }
 
     /**
-     A `UIView` used to indicate the user’s location and course on the map.
+     A `UIView` used to indicate the user's location and course on the map.
      
-     If the view conforms to `UserCourseView`, its `UserCourseView.update(location:pitch:direction:animated:)` method is frequently called to ensure that its visual appearance matches the map’s camera.
+     If the view conforms to `UserCourseView`, its `UserCourseView.update(location:pitch:direction:animated:)` method is frequently called to ensure that its visual appearance matches the map's camera.
      */
     @objc public var userCourseView: UIView? {
         didSet {
@@ -981,16 +981,16 @@ open class NavigationMapView: MLNMapView, UIGestureRecognizerDelegate {
     
     /**
      Attempts to localize road labels into the local language and other labels
-     into the system’s preferred language.
+     into the system's preferred language.
      
      When this property is enabled, the style automatically modifies the `text`
      property of any symbol style layer whose source is the
      <a href="https://www.mapbox.com/vector-tiles/mapbox-streets-v7/#overview">Mapbox
-     Streets source</a>. On iOS, the user can set the system’s preferred
+     Streets source</a>. On iOS, the user can set the system's preferred
      language in Settings, General Settings, Language & Region.
      
      Unlike the `MLNStyle.localizeLabels(into:)` method, this method localizes
-     road labels into the local language, regardless of the system’s preferred
+     road labels into the local language, regardless of the system's preferred
      language, in an effort to match road signage. The turn banner always
      displays road names and exit destinations in the local language, so you
      should call this method in the
